@@ -1,7 +1,8 @@
-let server = require('express');
+let server = require('express')
 let cors = require('cors')
-let bodyParse = require('body-parser');
+let bodyParse = require('body-parser')
 let course = require('./API/121/course')
+let student = require('./API/122/student')
 
 // Create a router
 let router = server.Router()
@@ -12,7 +13,7 @@ function Result(req, res) {
 }
 
 
-// course API
+// course API (api for question a)
 router.route('/course')
     .get(async function (req, res, next) {       // View all course  -- API example: http://localhost:3003/course   
         await course.viewCourse(req, res, next)  // Search course by name  -- API example http://localhost:3003/course?name=English
@@ -35,7 +36,31 @@ router.route('/course/:id')
 
 
 
+// student API (api for question b)
+router.route('/student')
+    .get(async function (req, res, next) {         // View student info  -- API example: http://localhost:3003/student
+        await student.viewStudent(req, res, next) // Search student by name -- API example: http://localhost:3003/student?name=Phạm 
+        Result(req, res)
+    })
 
+router.route('/student/:id')
+    .put(async function (req, res, next) {           // Update student info  -- API example: http://localhost:3003/student/STU1003 + body  
+        await student.updateStudent(req, res, next)
+        Result(req, res)
+    })
+    .delete(async function (req, res, next) {
+        await student.deleteStudent(req, res, next) // Delete student -- API example: http://localhost:3003/student/STU1003
+        Result(req, res)
+    })
+
+router.route('/student/sort')
+    .get(async function (req, res, next) {          // Sort student by attribute -- API example: http://localhost:3003/student/sort?key=Name
+        await student.sortStudent(req, res, next)
+        Result(req, res)
+    })
+
+
+    
 // use the router
 let app = server()
     .use(cors({
