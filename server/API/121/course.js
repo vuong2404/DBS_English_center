@@ -22,7 +22,7 @@ exports.viewCourse = async function (req, res, next) {
     }
     catch (err) {
         console.log('err: ', err)
-        res.send(err)
+        res.status(400).send(err)
     }
 }
 
@@ -49,7 +49,7 @@ exports.addCourse = async function (req, res, next) {
     }
     catch (err) {
         console.log('err: ', err)
-        res.send(err)
+        res.status(400).send(err)
     }
 }
 
@@ -77,7 +77,7 @@ exports.putCourse = async function (req, res, next) {
     }
     catch (err) {
         console.log('err: ', err)
-        res.send(err)
+        res.status(400).send(err)
     }
 }
 
@@ -98,6 +98,6 @@ exports.deleteCourse = async function (req, res, next) {
     }
     catch (err) {
         console.log('err: ', err)
-        res.send(err)
+        res.status(400).send(err)
     }
 }

@@ -81,7 +81,7 @@ CREATE TABLE Syllabus
 -- Khóa học
 CREATE TABLE Course
 (	
-	c_ID		CHAR(7)		 NOT NULL,
+	c_ID		CHAR(6)		 NOT NULL,
 	c_name		NVARCHAR(50) NOT NULL,
 	fee			INT			 NOT NULL,
 	s_date		DATE		 NOT NULL,
@@ -105,7 +105,7 @@ CREATE TABLE Class
 (	
 	class_ID		CHAR(7)		NOT NULL,
 	numb_student	INT			NOT NULL,
-	fk_c_ID			CHAR(7)		NOT NULL,
+	fk_c_ID			CHAR(6)		NOT NULL,
 	PRIMARY KEY (class_ID, fk_c_ID)
 );
 -- Khuyến mãi
@@ -126,7 +126,7 @@ CREATE TABLE Belong
 (	
 	fk_stu_ID	CHAR(7)		NOT NULL,
 	fk_class_ID CHAR(7)		NOT NULL,
-	fk_c_ID		CHAR(7)		NOT NULL
+	fk_c_ID		CHAR(6)		NOT NULL
 	PRIMARY KEY (fk_stu_ID, fk_class_ID, fk_c_ID)
 )
 
@@ -135,7 +135,7 @@ CREATE TABLE P_apply
 (	
 	discount_amount	INT			DEFAULT 0,
 	fk_p_ID			CHAR(7)		NOT NULL,
-	fk_c_ID			CHAR(7)		NOT NULL,
+	fk_c_ID			CHAR(6)		NOT NULL,
 	PRIMARY KEY (fk_p_ID, fk_c_ID)
 )
 
@@ -146,7 +146,7 @@ CREATE TABLE Attend
 	attendance	CHAR(1)		    NOT NULL, -- P for present, L for late, A for absent
 	note		NVARCHAR(100)	NOT NULL,
 	fk_class_ID	CHAR(7)		    NOT NULL,
-	fk_c_ID		CHAR(7)			NOT NULL,
+	fk_c_ID		CHAR(6)			NOT NULL,
 	fk_stu_ID	CHAR(7)			NOT NULL,
 	fk_lesson_id int			NOT NULL,
 
@@ -227,7 +227,7 @@ CREATE TABLE Degree
 CREATE TABLE Reg_form
 (	
 	form_ID			CHAR(7)		NOT NULL	PRIMARY KEY,
-	fk_c_ID			CHAR(7)		NOT NULL,
+	fk_c_ID			CHAR(6)		NOT NULL,
 	fk_stu_ID		CHAR(7)		NOT NULL,
 	total_fee		INT	,
 	reg_time		DATETIME	NOT NULL,
@@ -252,7 +252,7 @@ go
 CREATE TABLE Support
 (	
 	fk_class_ID		CHAR(7)		NOT NULL,
-	fk_c_ID			CHAR(7)		NOT NULL,
+	fk_c_ID			CHAR(6)		NOT NULL,
 	fk_lesson_id    int			NOT NULL,
 	fk_tutor_ID		CHAR(7)		NOT NULL,
 	attendance		CHAR(1)		NOT NULL,
@@ -263,7 +263,7 @@ CREATE TABLE Lesson
 (	
 	lesson_id		int			IDENTITY (1,1),
 	fk_class_ID		CHAR(7)		NOT NULL,
-	fk_c_ID			CHAR(7)		NOT NULL,
+	fk_c_ID			CHAR(6)		NOT NULL,
 	fk_teacher_ID	CHAR(7)		NOT NULL,
 	fk_room_id      CHAR(7)		NOT NULL,
 	fk_dnum			CHAR(7)		NOT NULL,
