@@ -72,7 +72,6 @@ router.route('/student/sort')
     })
 
 
-
 // use the router
 let app = server()
     .use(cors({
