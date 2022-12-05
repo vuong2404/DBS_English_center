@@ -58,8 +58,6 @@ router.route('/student/sort')
         await student.sortStudent(req, res, next)
         Result(req, res)
     })
-
-
     
 // use the router
 let app = server()
