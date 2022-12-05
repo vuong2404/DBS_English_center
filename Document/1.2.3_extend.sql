@@ -6,6 +6,20 @@ AS
 	GROUP BY stu_ID, fname, minit, lname, bdate, address, email
 GO
 
+
+CREATE PROCEDURE searchStudentInfo
+(@name NVARCHAR(50)
+)
+AS 
+BEGIN
+	SELECT stu_ID, fname, minit, lname, bdate, address, email, COUNT(*) AS totalCouse
+	FROM Reg_form, Student, Course
+	WHERE fk_c_ID = c_ID AND fk_stu_ID =  stu_ID AND e_date > GETDATE() AND CONCAT(fname, ' ', minit, ' ', lname) LIKE CONCAT(N'%', @name ,'%')
+	GROUP BY stu_ID, fname, minit, lname, bdate, address, email
+	ORDER BY stu_ID
+END
+GO
+
 CREATE PROCEDURE sortStudentInfo
 (
 @property NVARCHAR(50)
