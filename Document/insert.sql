@@ -166,7 +166,7 @@ ALTER table Department NOCHECK constraint all
 go
 insert into Department values 
 	('BRANCH1', 'HCMUT', 'Thu Duc, HCM','english_center1@gmail.com', 'CLK1000'),
-	('BRANCH2', 'HCMUT', 'Lý thường kiệt, P14, Quan 10 , HCM','enlish_center2@gmail.com', 'CLK1010')
+	('BRANCH2', 'HCMUT', N'Lý thường kiệt, P14, Quan 10 , HCM','enlish_center2@gmail.com', 'CLK1010')
 ALTER table Department CHECK constraint all
 go
 --syslabus
@@ -342,17 +342,20 @@ go
 
 
 INSERT INTO Lesson(fk_class_ID,fk_c_id,fk_teacher_ID, fk_room_id, fk_dnum, tea_attendance, s_time, f_time,l_date) VALUES
-	('L01', 'LA1001', 'TEA1001', 'R1', 'BRANCH1', 'P', '07:00:00', '09:50:00', '2022-11-27'),
-	('L01', 'LA1001', 'TEA1001', 'R1', 'BRANCH1', 'P', '07:00:00', '09:50:00', '2022-11-27'),
-	('L01', 'LA1001', 'TEA1001', 'R1', 'BRANCH1', 'P', '07:00:00', '09:50:00', '2022-11-27'),
-	('L01', 'LA1001', 'TEA1001', 'R1', 'BRANCH1', 'P', '07:00:00', '09:50:00', '2022-11-27'),
-	('L01', 'LA1001', 'TEA1001', 'R1', 'BRANCH1', 'P', '07:00:00', '09:50:00', '2022-11-27'),
-	('L01', 'LA1001', 'TEA1001', 'R1', 'BRANCH1', 'P', '07:00:00', '09:50:00', '2022-11-27'),
-	('L01', 'LA1001', 'TEA1001', 'R1', 'BRANCH1', 'P', '07:00:00', '09:50:00', '2022-11-27'),
-	('L01', 'LA1001', 'TEA1001', 'R1', 'BRANCH1', 'P', '07:00:00', '09:50:00', '2022-11-27'),
-	('L01', 'LA1001', 'TEA1001', 'R1', 'BRANCH1', 'P', '07:00:00', '09:50:00', '2022-11-27')
+	('L01', 'CC1002', 'TEA1001', 'R1', 'BRANCH2', 'P', '07:00:00', '09:50:00', '2022-11-21'),
+	('L02', 'CC1002', 'TEA1001', 'R1', 'BRANCH2', 'P', '07:00:00', '09:50:00', '2022-11-22'),
+	('L02', 'CC1003', 'TEA1002', 'R1', 'BRANCH2', 'P', '07:00:00', '09:50:00', '2022-11-23'),
+	('L01', 'CC1003', 'TEA1002', 'R1', 'BRANCH2', 'P', '07:00:00', '09:50:00', '2022-11-24'),
+	('L01', 'CC1004', 'TEA1003', 'R1', 'BRANCH2', 'P', '07:00:00', '09:50:00', '2022-11-25'),
+	('L02', 'CC1004', 'TEA1003', 'R1', 'BRANCH2', 'P', '07:00:00', '09:50:00', '2022-11-26'),
+	('L01', 'LA1003', 'TEA1003', 'R1', 'BRANCH1', 'P', '07:00:00', '09:50:00', '2022-11-27'),
+	('L02', 'LA1003', 'TEA1003', 'R1', 'BRANCH1', 'P', '07:00:00', '09:50:00', '2022-11-28'),
+	('L01', 'LA1004', 'TEA1004', 'R1', 'BRANCH1', 'P', '07:00:00', '09:50:00', '2022-11-29'),
+	('L02', 'LA1004', 'TEA1004', 'R1', 'BRANCH1', 'P', '07:00:00', '09:50:00', '2022-11-20'),
+	('L01', 'LG1001', 'TEA1005', 'R1', 'BRANCH1', 'P', '07:00:00', '09:50:00', '2022-11-19'),
+	('L01', 'LG1002', 'TEA1005', 'R1', 'BRANCH1', 'P', '07:00:00', '09:50:00', '2022-11-18'),
+	('L02', 'LG1002', 'TEA1001', 'R1', 'BRANCH1', 'P', '07:00:00', '09:50:00', '2022-11-17')
 go
-
 
 -- Học viên Tham gia buổi học của lớp học
 INSERT INTO Attend values 
@@ -531,6 +534,7 @@ select * from Attend -- ok
 select * from Belong -- ok
 select * from Bill  
 select * from Class -- ok
+select * from Teacher -- ok
 select * from Clerk -- ok
 select * from Course -- ok
 select * from Degree 
@@ -547,7 +551,6 @@ select * from Reg_form -- ok
 select * from Student --ok
 select * from Support -- ok
 select * from Syllabus -- ok
-select * from Teacher -- ok
 select * from Tutor -- ok
 
 

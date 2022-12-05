@@ -2,6 +2,8 @@ let server = require('express')
 let cors = require('cors')
 let bodyParse = require('body-parser')
 let course = require('./API/121/course')
+let branch = require('./API/121/branch')
+let syll = require('./API/121/syllabus')
 let student = require('./API/122/student')
 
 // Create a router
@@ -34,7 +36,17 @@ router.route('/course/:id')
         Result(req, res)
     })
 
+router.route('/branch')
+    .get(async function(req, res, next) {      // Get branch table  -- API example: http://localhost:3003/branch
+        await branch.branchInfo(req, res, next)
+        Result(req, res)
+    })
 
+router.route('/syll')                         // Get syllabus table  -- API example: http://localhost:3003/syll
+    .get(async function(req, res, next){
+        await syll.syllInfo(req, res, next)
+        Result(req, res)
+    })
 
 // student API (api for question b)
 router.route('/student')
@@ -60,7 +72,7 @@ router.route('/student/sort')
     })
 
 
-    
+
 // use the router
 let app = server()
     .use(cors({
