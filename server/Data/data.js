@@ -1,10 +1,17 @@
+require("dotenv").config();
+
 let db = {
-    database: 'English_center',
-    server: 'LAPTOP-NNU54Q8C\\SQLEXPRESS',
-    driver: 'msnodesqlv8',
-    options: {
-        trustedConnection: true
-    }
-}
+  database: process.env.DATABASE,
+  server: process.env.SERVER,
+  driver: "msnodesqlv8",
+  pool: {
+    max: 10,
+    min: 0,
+    idleTimeoutMillis: 30000,
+  },
+  options: {
+    trustedConnection: true,
+  },
+};
 
 module.exports = db;

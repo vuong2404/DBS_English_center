@@ -79,7 +79,7 @@ let app = server()
     })
     )
     .use('', router)
-    .listen(3003, function () {
+    .listen(process.env.PORT || 3003, function () {
         console.log(`Server running on port ${app.address().port}`)
     })
 
