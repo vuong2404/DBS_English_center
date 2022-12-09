@@ -5,7 +5,7 @@
 		-- Mã khoá học: c_id
 		-- Mã khuyến mãi: promotion_id
 	-- Trả về số tiền cần thanh toán sau khi tính toán
-ALTER FUNCTION calcTotalPay (@c_id CHAR(7), @promotion_id CHAR(7)) 
+CREATE OR ALTER FUNCTION calcTotalPay (@c_id CHAR(7), @promotion_id CHAR(7)) 
 RETURNs INT
 AS
 BEGIN
@@ -13,19 +13,33 @@ BEGIN
 	DECLARE @value int 
 	DECLARE @type varchar(7)
 	DECLARE @result int
+	DECLARE @check int
+	--kiem tra khoa hoc co duoc su dung khuyen mai do khong
+	SELECT @check =count(*)	
+	FROM P_apply
+	WHERE P_apply.fk_c_ID=@c_id
+	and P_apply.fk_p_ID=@promotion_id
 	set @fee = (SELECT fee FROM Course WHERE Course.c_id = @c_id)
 
+	-- ko
+	if(@check = 0) SET @result=@fee
+
+	-- co
+	ELSE
+	BEGIN
 	SELECT @value = p_value, 
 			@type = p_type	
 	FROM Promotion 
 	WHERE Promotion.p_ID = @promotion_id 
 
 	IF (@type = 'cash') SET @result =  @fee - @value ;
-	ELSE IF (@type = 'percen') SET @result = (SELECT @fee - @fee*@value/100 AS INTEGER); 
+	ELSE IF (@type = 'percen') SET @result = (SELECT (@fee - @fee*@value/100) AS INTEGER); 
 	ELSE SET @result = @fee 
+	END
 
 	return @result 
 END
+
 
 
 -- Funciton danh sách học viên của của một chi nhánh cho trước
@@ -63,4 +77,18 @@ select dbo.calcTotalPay('LA1001', 'D1P3')
 SELECT dbo.numOfCourses('STU1001')
 
 
+
+-------------------------------------------------------------
+----------------------------TEST-----------------------------
+select * from Course
+select * from Promotion
+select * from P_apply
+
+select dbo.calcTotalPay('LA1002','D1P2');
+select dbo.calcTotalPay('LA1002','D2P2');
+select dbo.calcTotalPay('LA1003','D2P2');
+select dbo.calcTotalPay('LA1004','D2P2');
+
+
+DROp function calcTotalPay
 
