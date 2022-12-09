@@ -15,7 +15,7 @@ exports.calcTotalPay = async function (req, res, next) {
             .input('c_id', sql.Char(7), valueID)
             .input('promotion_id', sql.Char(7), valuePID)
             .output('result',sql.Int)
-            .execute('sortStudentInfo')
+            .execute('calcTotalPay')
         sql.close()
 
         res.status(200).send(data.recordsets)
