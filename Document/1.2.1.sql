@@ -5,7 +5,7 @@
 -- If error return -1 else return 0
 CREATE PROCEDURE validateData
 (
-	@c_ID_		CHAR(7),
+	@c_ID_		CHAR(6),
 	@c_name_	NVARCHAR(50),
 	@fee_		INT	,
 	@s_date_	DATE,
@@ -54,7 +54,7 @@ GO
 -- If insert successfully return 0 else return -1
 CREATE PROCEDURE insertCourse
 (
-	@c_ID CHAR(7),
+	@c_ID CHAR(6),
 	@c_name		NVARCHAR(50),
 	@fee		INT	,
 	@s_date		DATE,
@@ -100,7 +100,7 @@ GO
 -- If delete successfully return 0 else return -1
 CREATE PROCEDURE deleteCourse
 (
-	@c_ID CHAR(7)
+	@c_ID CHAR(6)
 )
 AS
 BEGIN
@@ -133,7 +133,7 @@ GO
 -- If update successfully return 0 else return -1
 CREATE PROCEDURE updateCourse
 (
-	@c_ID		CHAR(7),
+	@c_ID		CHAR(6),
 	@c_name		NVARCHAR(50) = NULL , 
 	@fee		INT	= NULL,
 	@s_date		DATE = NULL,
