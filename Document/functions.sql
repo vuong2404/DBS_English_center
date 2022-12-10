@@ -6,6 +6,7 @@
 		-- Mã khuyến mãi: promotion_id
 	-- Trả về số tiền cần thanh toán sau khi tính toán
 CREATE OR ALTER FUNCTION calcTotalPay (@c_id CHAR(7), @promotion_id CHAR(7)) 
+
 RETURNs INT
 AS
 BEGIN

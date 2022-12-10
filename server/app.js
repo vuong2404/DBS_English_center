@@ -5,7 +5,7 @@ let course = require('./API/121/course')
 let branch = require('./API/121/branch')
 let syll = require('./API/121/syllabus')
 let student = require('./API/122/student')
-let course2 = require('./API/124/course2')
+let register = require('./API/124/register')
 
 // Create a router
 let router = server.Router()
@@ -73,31 +73,24 @@ router.route('/student/sort')
     })
 
 // course2 API (api for question c)
-router.route('/course2')
-    .get(async function (req, res, next) {       // View all course  -- API example: http://localhost:3003/course   
-        await course.viewCourse(req, res, next)  // Search course by name  -- API example http://localhost:3003/course?name=English
+router.route('/register')
+    .get(async function (req, res, next) {       // View all course  -- API example: http://localhost:3003/register   
+        await course.viewCourse(req, res, next)  // Search course by name  -- API example http://localhost:3003/register?name=English
         Result(req, res)
     })
-    .post(async function (req, res, next) {     // Add course  -- API example: http://localhost:3003/course + body
-        await course.addCourse(req, res, next)
-        Result(req, res)
-    })
-
-router.route('/course2/:id')
-    .put(async function (req, res, next) {      // Update course  -- API example: http://localhost:3003/course/LA1004 + body
-        await course.putCourse(req, res, next)
-        Result(req, res)
-    })
-    .delete(async function (req, res, next) {   // Delete course  -- API example: http://localhost:3003/course/LA1004 
-        await course.deleteCourse(req, res, next)
-        Result(req, res)
-    })
-router.route('/course2/calcpay')     // id: ma khoa hoc, pid: ma khuyen mai
-    .get(async function (req, res, next) {   // get money after using promotion  -- API example: http://localhost:3003/course2/calcpay?id=la1004&pid=d2p2
-        await course2.calcTotalPay(req, res, next)
+router.route('/register/calcpay/:id')            // id: ma khoa hoc, pid: ma khuyen mai
+    .get(async function (req, res, next) {       // get money after using promotion
+        console.log(req)                         //  -- API example: http://localhost:3003/register/calcpay/LA1004?pid=D2P2
+        await register.calcTotalPay(req, res, next)
         Result(req, res)
     })
 
+    // cái này trả ra kết quả mã có hợp lệ k để hiện ra dòng đỏ trong figma
+router.route('/register/check')       
+    .get(async function (req, res, next) {         // View all course  -- API example: http://localhost:3003/register   
+        await register.CheckApply(req, res, next)  //   -- API example http://localhost:3003/register/check/LA1004?pid=D2P2
+        Result(req, res)
+    })
 
 // use the router
 let app = server()
