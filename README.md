@@ -85,5 +85,5 @@
     3. câu c
         - Những cái đầu tương tự câu a
         - Tính toán tiền sau khi sử dụng khuyến mãi(METHOD: GET):
-            API: http://localhost:3003/student/calcpay?id=maID&pid=makhuyenmai
+            API: http://localhost:3003/student/calcpay/makhoahoc?pid=makhuyenmai
 
