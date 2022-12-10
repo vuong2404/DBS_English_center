@@ -72,25 +72,25 @@ router.route('/student/sort')
         Result(req, res)
     })
 
-// course2 API (api for question c)
-router.route('/register')
-    .get(async function (req, res, next) {       // View all course  -- API example: http://localhost:3003/register   
-        await course.viewCourse(req, res, next)  // Search course by name  -- API example http://localhost:3003/register?name=English
-        Result(req, res)
-    })
-router.route('/register/calcpay/:id')            // id: ma khoa hoc, pid: ma khuyen mai
+// // course2 API (api for question c)
+// router.route('/register')
+//     .get(async function (req, res, next) {       // View all course  -- API example: http://localhost:3003/register   
+//         await course.viewCourse(req, res, next)  // Search course by name  -- API example http://localhost:3003/register?name=English
+//         Result(req, res)
+//     })
+router.route('/register/calcpay')            // id: ma khoa hoc, pid: ma khuyen mai
     .get(async function (req, res, next) {       // get money after using promotion
         console.log(req)                         //  -- API example: http://localhost:3003/register/calcpay/LA1004?pid=D2P2
         await register.calcTotalPay(req, res, next)
         Result(req, res)
     })
 
-    // cái này trả ra kết quả mã có hợp lệ k để hiện ra dòng đỏ trong figma
-router.route('/register/check')       
-    .get(async function (req, res, next) {         // View all course  -- API example: http://localhost:3003/register   
-        await register.CheckApply(req, res, next)  //   -- API example http://localhost:3003/register/check/LA1004?pid=D2P2
-        Result(req, res)
-    })
+//     // cái này trả ra kết quả mã có hợp lệ k để hiện ra dòng đỏ trong figma
+// router.route('/register/check')       
+//     .get(async function (req, res, next) {         // View all course  -- API example: http://localhost:3003/register   
+//         await register.CheckApply(req, res, next)  //   -- API example http://localhost:3003/register/check/LA1004?pid=D2P2
+//         Result(req, res)
+//     })
 
 // use the router
 let app = server()

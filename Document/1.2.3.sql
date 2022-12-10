@@ -1,4 +1,5 @@
 ﻿-- Trả về danh sách giáo viên dạy tại một chi nhánh cho trước
+use English_center
 CREATE PROCEDURE getTeacherFromDept 
 (@dnum CHAR(7)
 )

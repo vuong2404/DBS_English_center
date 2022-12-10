@@ -2,7 +2,7 @@ import DefaultLayout from '../Layouts/DefaultLayout/DefaultLayout';
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import {} from 'mdb-react-ui-kit';
-import { Button, Form, InputGroup, Modal, OverlayTrigger, Table } from 'react-bootstrap';
+import { Button, Form, InputGroup, Modal, Table } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { getBranches, getCourses, getSyllabuss } from '../api/courseAPI';
