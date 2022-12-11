@@ -231,6 +231,8 @@ CREATE TABLE Reg_form
 	fk_stu_ID		CHAR(7)		NOT NULL,
 	total_fee		INT	,
 	reg_time		DATETIME	NOT NULL,
+	Status_Register NVARCHAR(50) DEFAULT N'Chưa xác nhận'
+
 )
 
 -- Hóa đơn
@@ -433,7 +435,6 @@ ADD CONSTRAINT fk_les_teach_uid FOREIGN KEY (fk_teacher_ID) REFERENCES Teacher(t
 ALTER TABLE Lesson 
 	Add constraint fk_lesson_room foreign key (fk_dnum, fk_room_id) REFERENCES Room(fk_dnum, room_ID)
 	ON DELETE CASCADE ON UPDATE CASCADE
-
 
 
 

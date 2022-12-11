@@ -6,6 +6,7 @@ let branch = require('./API/121/branch')
 let syll = require('./API/121/syllabus')
 let student = require('./API/122/student')
 let register = require('./API/124/register')
+let regForm = require('./API/124/reg_form')
 
 // Create a router
 let router = server.Router()
@@ -72,12 +73,7 @@ router.route('/student/sort')
         Result(req, res)
     })
 
-// // course2 API (api for question c)
-// router.route('/register')
-//     .get(async function (req, res, next) {       // View all course  -- API example: http://localhost:3003/register   
-//         await course.viewCourse(req, res, next)  // Search course by name  -- API example http://localhost:3003/register?name=English
-//         Result(req, res)
-//     })
+// Register API (api for question c)
 router.route('/register/calcpay')            // id: ma khoa hoc, pid: ma khuyen mai
     .get(async function (req, res, next) {       // get money after using promotion
         console.log(req)                         //  -- API example: http://localhost:3003/register/calcpay/LA1004?pid=D2P2
@@ -85,12 +81,22 @@ router.route('/register/calcpay')            // id: ma khoa hoc, pid: ma khuyen 
         Result(req, res)
     })
 
-//     // cái này trả ra kết quả mã có hợp lệ k để hiện ra dòng đỏ trong figma
-// router.route('/register/check')       
-//     .get(async function (req, res, next) {         // View all course  -- API example: http://localhost:3003/register   
-//         await register.CheckApply(req, res, next)  //   -- API example http://localhost:3003/register/check/LA1004?pid=D2P2
-//         Result(req, res)
-//     })
+router.route('/register') 
+    .get(async function (req, res, next) {         // View register form info  -- API example: http://localhost:3003/register
+        await regForm.viewReg(req, res, next)
+        Result(req, res)
+    })
+router.route('/register/add/:id')                  // Add register form  --  API example: http://localhost:3003/register/add/REG1065 + body
+    .post(async function (req, res, next) {
+        await regForm.addReg(req, res, next)
+        Result(req, res)
+    })
+
+router.route('/register/update/:id')               // Update register form  -- API example: http://localhost:3003/register/update/REG1002 + body
+    .put(async function (req, res, next) {
+        await regForm.updateReg(req, res, next)
+        Result(req, res)
+    })
 
 // use the router
 let app = server()

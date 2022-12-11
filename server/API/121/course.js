@@ -44,7 +44,7 @@ exports.addCourse = async function (req, res, next) {
             res.status(200).send({ "returnValue": data.returnValue })
         }
         else {
-            res.status(400).send({ "returnValue": data.returnValue })
+            res.status(400).send({ "returnValue": data.returnValue, "message": "Môn học này đã tồn tại" })
         }
     }
     catch (err) {
