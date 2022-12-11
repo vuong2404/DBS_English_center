@@ -193,7 +193,7 @@ function Course() {
           </Button>
         </div>
         {courses ? (
-          <Table className="pt-3">
+          <Table striped className="pt-3">
             <thead>
               <tr>
                 <th>Mã khoá học</th>

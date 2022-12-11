@@ -6,14 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { getCourses } from '../api/courseAPI';
 import axios from 'axios';
-import StudentLayout from '../Layouts/StudentLayout/StudentLayout';
 import DefaultLayout from '../Layouts/DefaultLayout/DefaultLayout';
 
 function RegisterCourses() {
   const [courses, setCourses] = useState([]);
   const [searchKey, setSearchKey] = useState('');
   const [promotion, setPromotion] = useState('');
-  const [applydDone, setApplydDone] = useState(false);
   const [reduceMoney, setReduceMoney] = useState(0);
   const [promotionMessage, setPromotionMessage] = useState({type: 'success', text: ''})
 
@@ -68,7 +66,20 @@ function RegisterCourses() {
     setSelectedCourses(array ? [array] : []);
 
     setPage('register');
-  };
+  }; 
+
+  console.log(selectedCourses[0])
+
+  const handleRegisterCourse = async () => {
+      // await axios({
+      //   method: 'post',
+      //   url: 'http://localhost:3003/register/add',
+      //   data: {
+      //     fk_c_ID: selectedCourses[0].c_ID,
+
+      //   }
+      // })
+  }
 
   const totalCost = selectedCourses.reduce((res, item) => res + item.fee, 0);
 
@@ -95,7 +106,7 @@ function RegisterCourses() {
             </InputGroup>
           </div>
           {courses ? (
-            <Table className="pt-3">
+            <Table striped  className="pt-3">
               <thead>
                 <tr>
                   <th>Chọn</th>
@@ -185,7 +196,7 @@ function RegisterCourses() {
                     Áp dụng
                   </button>
                 </div>
-                  <p className={promotionMessage.type == 'error' ? 'text-danger': 'text-primary'}>{promotionMessage.text}</p>
+                  <p className={promotionMessage.type === 'error' ? 'text-danger': 'text-primary'}>{promotionMessage.text}</p>
 
                 <div className="d-flex justify-content-between py-2 px-5 border-top">
                   <span className="me-4">Tạm tính:</span>
@@ -199,7 +210,7 @@ function RegisterCourses() {
                   <span className="me-4">Tổng cộng</span>
                   <span>{totalCost - reduceMoney}</span>
                 </div>
-                <Button variant="success" className="mx-auto px-5" onClick={() => setPage('')}>
+                <Button variant="success" className="mx-auto px-5" onClick={() =>handleRegisterCourse()}>
                   Đăng kí
                 </Button>
               </div>

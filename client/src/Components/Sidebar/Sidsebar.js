@@ -15,33 +15,33 @@ function Sidebar() {
         <span className="py-2 font-weight-bold">Minh Vương</span>
       </div>
       <ul className="w-100 p-0 mt-5">
-        <li className={`px-3 ${path ==='/courses' && 'bg-tab-sidebar'} d-flex align-items-center border-0 my-2 rounded`}>
+        <li className={`px-3 my-3 py-1 ${path ==='/courses' && 'bg-tab-sidebar'} d-flex align-items-center border-0 my-2 rounded`}>
             <Link to = '/courses'>
               <img src={courseIcon} width='50px' alt = ''/>
               <span className='px-2 text-dark'>Khoá học</span>
             </Link>
         </li>
-        <li className={`px-3 ${path ==='/student' && 'bg-tab-sidebar'} d-flex align-items-center border-0 my-2 rounded`}>
+        <li className={`px-3 my-3 py-1 ${path ==='/student' && 'bg-tab-sidebar'} d-flex align-items-center border-0 my-2 rounded`}>
             <Link to ='/student'>
               <img src={hvIcon} width='50px' alt = ''/>
               <span className='px-2 text-dark'>Học viên</span>
             </Link>
         </li>
-        <li className={`px-3 ${path ==='/teacher' && 'bg-tab-sidebar'} d-flex align-items-center border-0 my-2 rounded`}>
+        <li className={`px-3 my-3 py-1 ${path ==='/teacher' && 'bg-tab-sidebar'} d-flex align-items-center border-0 my-2 rounded`}>
             <Link to = '/teacher'>
               <img src={gvIcon} width='50px' alt = ''/>
               <span className='px-2 text-dark'>Giáo viên</span>
             </Link>
         </li>
 
-        <li className={`px-3 ${path ==='/register-form' && 'bg-tab-sidebar'} d-flex align-items-center border-0 my-2 rounded`}>
+        <li className={`px-3 my-3 py-1 ${path ==='/register-form' && 'bg-tab-sidebar'} d-flex align-items-center border-0 my-2 rounded`}>
             <Link to = '/register-form'>
               <img src={gvIcon} width='50px' alt = ''/>
               <span className='px-2 text-dark'>Phiếu đăng kí</span>
             </Link>
         </li>
 
-        <li className={`px-3 ${path ==='/register' && 'bg-tab-sidebar'} d-flex align-items-center border-0 my-2 rounded`}>
+        <li className={`px-3 my-3 py-1 ${path ==='/register' && 'bg-tab-sidebar'} d-flex align-items-center border-0 my-2 rounded`}>
             <Link to = '/register'>
               <img src={gvIcon} width='50px' alt = ''/>
               <span className='px-2 text-dark'>Đăng kí Khoá học</span>
