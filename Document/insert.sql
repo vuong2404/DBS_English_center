@@ -359,26 +359,26 @@ go
 
 -- Học viên Tham gia buổi học của lớp học
 INSERT INTO Attend values 
-	('P', N'Buổi học tuyệt vời!','L01','LA1001', 'STU1001',1),
-	('P', N'Buổi học tuyệt vời!','L01','LA1001', 'STU1002',1),
-	('P', N'Buổi học tuyệt vời!','L01','LA1001', 'STU1003',1),
-	('P', N'Giảng dể hiểu quá','L01','LA1001', 'STU1004',1),
-	('P', N'Buổi học tuyệt vời!','L01','LA1001', 'STU1005',1),
-	('P', N'Buổi học tuyệt vời!','L01','LA1001', 'STU1006',1),
-	('L', N'Em ngủ quên nên đi muộn ạ:((','L01','LA1001', 'STU1007',1),
-	('P', N'Buổi học tuyệt vời!','L01','LA1001', 'STU1008',1),
-	('P', N'Goog lesson!','L01','LA1001', 'STU1009',1),
-	('P', N'Buổi học tuyệt vời!','L01','LA1001', 'STU1010',1),
-	('P', N'Buổi học tuyệt vời!','L01','LA1001', 'STU1011',1),
-	('P', N'Giảng viên nói nhanh quá :v','L01','LA1001', 'STU1012',1),
-	('P', N'Buổi học tuyệt vời!','L01','LA1001', 'STU1013',1),
-	('P', N'Buổi học tuyệt vời!','L01','LA1001', 'STU1014',1),
-	('P', N'Mấy anh giảng viên nhiệt tình ghê!','L01','LA1001', 'STU1015',1),
-	('P', N'Buổi học tuyệt vời!','L01','LA1001', 'STU1016',1),
-	('P', N'Hay!','L01','LA1001', 'STU1017',1),
-	('P', N'Buổi học tuyệt vời!','L01','LA1001', 'STU1018',1),
-	('P', N'Buổi học tuyệt vời!','L01','LA1001', 'STU1019',1),
-	('P', N'Buổi học tuyệt vời!','L01','LA1001', 'STU1020',1)
+	('P', N'Buổi học tuyệt vời!','L01','CC1002', 'STU1001',1),
+	('P', N'Buổi học tuyệt vời!','L01','CC1002', 'STU1002',1),
+	('P', N'Buổi học tuyệt vời!','L01','CC1002', 'STU1003',1),
+	('P', N'Giảng dể hiểu quá','L01','CC1002', 'STU1004',1),
+	('P', N'Buổi học tuyệt vời!','L01','CC1002', 'STU1005',1),
+	('P', N'Buổi học tuyệt vời!','L01','CC1002', 'STU1006',1),
+	('L', N'Em ngủ quên nên đi muộn ạ:((','L01','CC1002', 'STU1007',1),
+	('P', N'Buổi học tuyệt vời!','L01','CC1002', 'STU1008',1),
+	('P', N'Goog lesson!','L01','CC1002', 'STU1009',1),
+	('P', N'Buổi học tuyệt vời!','L01','CC1002', 'STU1010',1),
+	('P', N'Buổi học tuyệt vời!','L01','CC1002', 'STU1011',1),
+	('P', N'Giảng viên nói nhanh quá :v','L01','CC1002', 'STU1012',1),
+	('P', N'Buổi học tuyệt vời!','L01','CC1002', 'STU1013',1),
+	('P', N'Buổi học tuyệt vời!','L01','CC1002', 'STU1014',1),
+	('P', N'Mấy anh giảng viên nhiệt tình ghê!','L01','CC1002', 'STU1015',1),
+	('P', N'Buổi học tuyệt vời!','L01','CC1002', 'STU1016',1),
+	('P', N'Hay!','L01','CC1002', 'STU1017',1),
+	('P', N'Buổi học tuyệt vời!','L01','CC1002', 'STU1018',1),
+	('P', N'Buổi học tuyệt vời!','L01','CC1002', 'STU1019',1),
+	('P', N'Buổi học tuyệt vời!','L01','CC1002', 'STU1020',1)
 go
 
 -- Trợ giảng hổ trợ buổi học
@@ -552,5 +552,7 @@ select * from Student --ok
 select * from Support -- ok
 select * from Syllabus -- ok
 select * from Tutor -- ok
+
+
 
 
