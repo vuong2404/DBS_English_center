@@ -48,7 +48,7 @@ export const BodyContainer = styled.div`
         width: 100%;
     }
     td, th{
-        padding: 5px;
+        padding: 16px;
     }
     th {
         white-space: nowrap;

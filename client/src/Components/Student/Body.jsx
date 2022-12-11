@@ -192,32 +192,32 @@ const Body = () =>{
                     <tr style={{
                             backgroundColor: 'white',
                         }}>
-                        <th>MSHV</th>      
-                        <th>Họ</th>      
-                        <th>Tên đệm</th>      
-                        <th>Tên</th>      
-                        <th>Ngày sinh</th>      
-                        <th>Địa chỉ</th> 
-                        <th>Email</th>      
-                        <th>Số khóa học</th> 
-                        <th>Chỉnh sửa</th>
-                        <th>Xóa</th>     
+                        <th width='5%'>MSHV</th>      
+                        <th width='5%'>Họ</th>      
+                        <th width='5%'>Tên đệm</th>      
+                        <th width='5%'>Tên</th>      
+                        <th width='10%'>Ngày sinh</th>      
+                        <th width='100%'>Địa chỉ</th> 
+                        <th width='10%'>Email</th>      
+                        <th width='10%'>Số khóa học</th> 
+                        <th width='10%'>Chỉnh sửa</th>
+                        <th width='10%'>Xóa</th>     
                     </tr>
                 </thead>
                 <tbody>
                     {students.map((student, idx) => (
                         <tr key={idx} style={{
                         }}>
-                            <td>{student.stu_ID}</td>
-                            <td>{student.fname}</td>
-                            <td>{student.minit}</td>
-                            <td>{student.lname}</td>
-                            <td>{moment.utc(student.bdate).format('YYYY-MM-DD')}</td>
-                            <td>{student.address}</td>
-                            <td>{student.email}</td>
-                            <td>{student.totalCouse}</td>
-                            <td>
-                                <button className="btn btn-primary" 
+                            <td width={'5%'} className='text-center'>{student.stu_ID}</td>
+                            <td width={'5%'} className='text-center'>{student.fname}</td>
+                            <td width={'5%'} className='text-center'>{student.minit}</td>
+                            <td width={'5%'} className='text-center'>{student.lname}</td>
+                            <td width={'10%'} className='text-center'>{moment.utc(student.bdate).format('YYYY-MM-DD')}</td>
+                            <td width={'30%'}>{student.address}</td>
+                            <td width={'10%'} >{student.email}</td>
+                            <td width={'10%'} className="text-center">{student.totalCouse}</td>
+                            <td width={'10%'} className="text-center">
+                                <button className="btn btn-info" 
                                         data-bs-toggle="modal" 
                                         data-bs-target="#editStudent"
                                         onClick={() => {setID(student.stu_ID); 
@@ -234,8 +234,8 @@ const Body = () =>{
                                                         setName(student.lname);}}
                                         ><FaUserEdit/></button>
                             </td>
-                            <td>
-                                <button className="btn btn-primary" 
+                            <td width={'10%'} className="text-center">
+                                <button className="btn btn-danger" 
                                         data-bs-toggle="modal" 
                                         data-bs-target="#deleteStudent"
                                         onClick={() => {setID(student.stu_ID); setFname(student.fname); setMinit(student.minit); setName(student.lname);}}
