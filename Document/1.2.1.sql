@@ -3,6 +3,7 @@
 -- Check fee < 0 ?
 -- Check s_date >= e_date ?  
 -- If error return -1 else return 0
+use English_center
 CREATE PROCEDURE validateData
 (
 	@c_ID_		CHAR(6),

@@ -8,7 +8,6 @@ import axios from 'axios'
 import { BodyContainer, Search } from "./Body.styled";
 import { BiSearch } from 'react-icons/bi'
 import { FaUserEdit } from 'react-icons/fa'
-import { BsFillPersonXFill, BsExclamationCircle } from 'react-icons/bs'
 import {} from 'bootstrap'
 
 const Body = () =>{
@@ -18,14 +17,15 @@ const Body = () =>{
     const [minit, setMinit] = useState('');
     const [name, setName] = useState('');
     const [sortState, setSortState] = useState('')
-    const [students, setStudent] = useState([]);
+    const [teachers, setTeacher] = useState([]);
     const [editData, setEditData] = useState({
         fname: '',
         minit: '',
         lname: '',
         bdate: '',
         address: '',
-        email: ''
+        email: '',
+        salary: ''
     })
     const handleEdit = (e) => {
         const newData = {...editData};
@@ -35,59 +35,52 @@ const Body = () =>{
     }
     const handleSend = (e) => {
         e.preventDefault();
-        e.stopPropagation()
-
-        axios.put(`http://localhost:3003/student/${ID}`,{
+        axios.put(`http://localhost:3003/teacher/${ID}`,{
             fname: editData.fname,
             minit: editData.minit,
             lname: editData.lname,
             bdate: editData.bdate,
             address: editData.address,
-            email: editData.email
+            email: editData.email,
+            salary: editData.salary
         }).then((response) => {
-            sortStudent(sortState)
-            
+            sortTeacher(sortState)
         }
         )
     }
-    const fetchStudents = async() => {
-        const response = await axios.get("http://localhost:3003/student")
-        const students = response.data;
-        setStudent(students[0])
+    const fetchTeachers = async() => {
+        const response = await axios.get("http://localhost:3003/teacher")
+        const teachers = response.data;
+        setTeacher(teachers[0])
     };
 
     useEffect(() => {
-        fetchStudents()
+        fetchTeachers()
     }, []);
 
     const searchName = (name) => {
-        axios.get(`http://localhost:3003/student?name=${name}`).then((response) => {
-        setStudent(response.data[0]);
+        axios.get(`http://localhost:3003/teacher?name=${name}`).then((response) => {
+        setTeacher(response.data[0]);
         }
         );
     };
 
-    const sortStudent = (attr) => {
-        axios.get(`http://localhost:3003/student/sort?key=${attr}`).then((response) =>
-        setStudent(response.data[0]),
+    const sortTeacher = (attr) => {
+        axios.get(`http://localhost:3003/teacher/sort?key=${attr}`).then((response) =>
+        setTeacher(response.data[0]),
         setSortState(attr)
         );
     };
 
-    const deleteStudent = (id) => {
-        axios.delete(`http://localhost:3003/student/${id}`).then((response) => {
-            sortStudent(sortState);
-        })
-    };
 
     return (
         <BodyContainer>
-            <div className="modal fade" id="editStudent" tabIndex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
+            <div className="modal fade" id="editTeacher" tabIndex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title" id="title">
-                                Chỉnh sửa thông tin học viên {fname} {minit} {name}
+                                Chỉnh sửa thông tin giáo viên {fname} {minit} {name}
                             </h5>
                             <button type="button" className="btn-close" aria-label="Close" data-bs-dismiss="modal"></button>
                         </div>
@@ -95,16 +88,16 @@ const Body = () =>{
                             <div className="modal-body">
                                 <div className="form-group">
                                     <label htmlFor="fname" className="col-form-label">Họ</label>
-                                    <input type="text" onChange={(e) => handleEdit(e)} value={editData.fname} className="form-control" id="fname" maxlength="15" required/>
+                                    <input type="text" onChange={(e) => handleEdit(e)} value={editData.fname} className="form-control" id="fname" maxLength="15" required/>
                                     <div className="invalid-feedback">Vui lòng nhập họ!</div>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="minit" className="col-form-label">Tên đệm</label>
-                                    <input type="text" onChange={(e) => handleEdit(e)} value={editData.minit} className="form-control" id="minit" maxlength="15"/>
+                                    <input type="text" onChange={(e) => handleEdit(e)} value={editData.minit} className="form-control" id="minit" maxLength="15"/>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="lname" className="col-form-label">Tên</label>
-                                    <input type="text" onChange={(e) => handleEdit(e)} value={editData.lname} className="form-control" id="lname" maxlength="15" required/>
+                                    <input type="text" onChange={(e) => handleEdit(e)} value={editData.lname} className="form-control" id="lname" maxLength="15" required/>
                                     <div className="invalid-feedback">Vui lòng nhập tên!</div>
                                 </div>
                                 <div className="form-group">
@@ -114,13 +107,18 @@ const Body = () =>{
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="address" className="col-form-label">Địa chỉ</label>
-                                    <input type="text" onChange={(e) => handleEdit(e)} value={editData.address} className="form-control" id="address" maxlength="100" required/>
+                                    <input type="text" onChange={(e) => handleEdit(e)} value={editData.address} className="form-control" id="address" maxLength="100" required/>
                                     <div className="invalid-feedback">Vui lòng nhập địa chỉ!</div>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="email" className="col-form-label">Email</label>
-                                    <input type="email" onChange={(e) => handleEdit(e)} value={editData.email} className="form-control" id="email" maxlength="50" required/>
+                                    <input type="email" onChange={(e) => handleEdit(e)} value={editData.email} className="form-control" id="email" maxLength="50" required/>
                                     <div className="invalid-feedback">Email không hợp lệ</div>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="salary" className="col-form-label">Lương</label>
+                                    <input type="number" onChange={(e) => handleEdit(e)} value={editData.salary} className="form-control" id="salary" max="100000000" required/>
+                                    <div className="invalid-feedback">Lương không hợp lệ</div>
                                 </div>
                                 <div className="modal-footer d-flex justify-content-around">
                                 <button type="button" className="btn btn-secondary" 
@@ -137,25 +135,8 @@ const Body = () =>{
                     </div>
                 </div>
             </div>
-            
-            <div className="modal fade" id="deleteStudent" tabIndex="-1" role="dialog" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered" role="document">
-                    <div className="modal-content" style={{width:"400px", height: "350px"}}>
-                        <div className="modal-body d-flex flex-column justify-content-around align-items-center font-weight-bold">
-                        <div className="noti">Xóa học viên {fname} {minit} {name} khỏi danh sách</div>
-                        <BsExclamationCircle className="icon"/>
-                        <div className="rework">Bạn sẽ không được hoàn tác</div>
-                        </div>
-                            <div className="modal-footer d-flex justify-content-around">
-                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" style={{backgroundColor: "grey", borderColor:"grey", width:"100px"}}>Hủy</button>
-                                <button type="button" className="btn btn-primary" onClick={() => deleteStudent(ID)} data-bs-dismiss="modal" style={{backgroundColor: "red", borderColor:"red", width:"100px"}}>Xóa</button>
-                            </div>
-                    </div>
-                </div>
-            </div>
-
             <div className='tag'>
-                <div>Học viên</div>
+                <div>Giáo viên</div>
             </div>
             <div className="tool" >
                 <div className="dropdown">
@@ -163,17 +144,16 @@ const Body = () =>{
                     Sắp xếp theo
                 </button>
                 <ul className="dropdown-menu">
-                    <li><button className="dropdown-item" type="button" onClick={() => sortStudent('ID')}>Mã sinh viên</button></li>
-                    <li><button className="dropdown-item" type="button" onClick={() => sortStudent('Name')}>Tên sinh viên</button></li>
-                    <li><button className="dropdown-item" type="button" onClick={() => sortStudent('Bdate')}>Ngày sinh</button></li>
-                    <li><button className="dropdown-item" type="button" onClick={() => sortStudent('Address')}>Địa chỉ</button></li>
-                    <li><button className="dropdown-item" type="button" onClick={() => sortStudent('Email')}>Email</button></li>
-                    <li><button className="dropdown-item" type="button" onClick={() => sortStudent('numCourse')}>Số khóa học</button></li>                
+                    <li><button className="dropdown-item" type="button" onClick={() => sortTeacher('ID')}>Mã giáo viên</button></li>
+                    <li><button className="dropdown-item" type="button" onClick={() => sortTeacher('Bdate')}>Ngày sinh</button></li>
+                    <li><button className="dropdown-item" type="button" onClick={() => sortTeacher('Address')}>Địa chỉ</button></li>
+                    <li><button className="dropdown-item" type="button" onClick={() => sortTeacher('Email')}>Email</button></li>
+                    <li><button className="dropdown-item" type="button" onClick={() => sortTeacher('salary')}>Lương</button></li>                
                 </ul>
                 </div>
                 <Search>
                     <input  type="text" 
-                            placeholder="Nhập tên học viên"         
+                            placeholder="Nhập tên giáo viên"         
                             defaultValue={message}
                             onChange={(event) => setMessage(event.target.value)}
                             onKeyDown={(event) => {
@@ -192,54 +172,47 @@ const Body = () =>{
                     <tr style={{
                             backgroundColor: 'white',
                         }}>
-                        <th>MSHV</th>      
+                        <th>MSGV</th>      
                         <th>Họ</th>      
                         <th>Tên đệm</th>      
                         <th>Tên</th>      
                         <th>Ngày sinh</th>      
                         <th>Địa chỉ</th> 
                         <th>Email</th>      
-                        <th>Số khóa học</th> 
-                        <th>Chỉnh sửa</th>
-                        <th>Xóa</th>     
+                        <th>Lương</th> 
+                        <th className="text-nowrap">Chỉnh sửa</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {students.map((student, idx) => (
+                    {teachers.map((teacher, idx) => (
                         <tr key={idx} style={{
                         }}>
-                            <td>{student.stu_ID}</td>
-                            <td>{student.fname}</td>
-                            <td>{student.minit}</td>
-                            <td>{student.lname}</td>
-                            <td>{moment.utc(student.bdate).format('YYYY-MM-DD')}</td>
-                            <td>{student.address}</td>
-                            <td>{student.email}</td>
-                            <td>{student.totalCouse}</td>
-                            <td>
+                            <td>{teacher.teacher_ID}</td>
+                            <td>{teacher.fname}</td>
+                            <td>{teacher.minit}</td>
+                            <td>{teacher.lname}</td>
+                            <td>{moment.utc(teacher.bdate).format('YYYY-MM-DD')}</td>
+                            <td>{teacher.address}</td>
+                            <td>{teacher.email}</td>
+                            <td>{teacher.salary}</td>
+                            <td className="text-center">
                                 <button className="btn btn-primary" 
                                         data-bs-toggle="modal" 
-                                        data-bs-target="#editStudent"
-                                        onClick={() => {setID(student.stu_ID); 
+                                        data-bs-target="#editTeacher"
+                                        onClick={() => {setID(teacher.teacher_ID); 
                                                         setEditData({
-                                                            fname: student.fname,
-                                                            minit: student.minit,
-                                                            lname: student.lname,
-                                                            bdate: student.bdate,
-                                                            address: student.address,
-                                                            email: student.email
+                                                            fname: teacher.fname,
+                                                            minit: teacher.minit,
+                                                            lname: teacher.lname,
+                                                            bdate: teacher.bdate,
+                                                            address: teacher.address,
+                                                            email: teacher.email,
+                                                            salary: teacher.salary
                                                         });
-                                                        setFname(student.fname); 
-                                                        setMinit(student.minit); 
-                                                        setName(student.lname);}}
+                                                        setFname(teacher.fname); 
+                                                        setMinit(teacher.minit); 
+                                                        setName(teacher.lname);}}
                                         ><FaUserEdit/></button>
-                            </td>
-                            <td>
-                                <button className="btn btn-primary" 
-                                        data-bs-toggle="modal" 
-                                        data-bs-target="#deleteStudent"
-                                        onClick={() => {setID(student.stu_ID); setFname(student.fname); setMinit(student.minit); setName(student.lname);}}
-                                ><BsFillPersonXFill/></button>
                             </td>
                         </tr>
                     ))}
