@@ -83,7 +83,25 @@
                 API: http://localhost:3003/student/sort?key=numCourse
 
     3. câu c
-        - Những cái đầu tương tự câu a
-        - Tính toán tiền sau khi sử dụng khuyến mãi(METHOD: GET):
-            API: http://localhost:3003/student/calcpay/makhoahoc?pid=makhuyenmai
+        3.1 Giao diện và tính tiền sau khuyến mãi
+            - Những cái đầu tương tự câu a
+            - Tính toán tiền sau khi sử dụng khuyến mãi(METHOD: GET):
+                API: http://localhost:3003/student/calcpay/makhoahoc?pid=makhuyenmai
+        3.2 Hiển thị thông tin phiếu đăng kí (METHOD: GET)
+            API: http://localhost:3003/register
+        3.3 Thêm phiếu đăng ký mới (METHOD: POST)
+            API: http://localhost:3003/register/add/:id + body
+            body ở đây có định dạng
+                {
+                    "fk_c_ID": value,
+                    "fk_stu_ID": value
+                }
+        3.4 Cập nhật thông tin phiếu đăng ký (METHOD: PUT)
+            API: http://localhost:3003/register/update/:id + body
+            body ở đây cs định dạng
+                {
+                    "statusUpdate": value
+                }
+
+        
 
