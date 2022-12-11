@@ -7,6 +7,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { getCourses } from '../api/courseAPI';
 import axios from 'axios';
 import StudentLayout from '../Layouts/StudentLayout/StudentLayout';
+import DefaultLayout from '../Layouts/DefaultLayout/DefaultLayout';
 
 function RegisterCourses() {
   const [courses, setCourses] = useState([]);
@@ -72,7 +73,7 @@ function RegisterCourses() {
   const totalCost = selectedCourses.reduce((res, item) => res + item.fee, 0);
 
   return (
-    <StudentLayout>
+    <DefaultLayout>
       {page === '' && (
         <form onSubmit={(e) => handleSubmit(e)} className="px-5 mt-3">
           <h1>Danh sách khoá học</h1>
@@ -206,7 +207,7 @@ function RegisterCourses() {
           </div>
         </div>
       )}
-    </StudentLayout>
+    </DefaultLayout>
   );
 }
 

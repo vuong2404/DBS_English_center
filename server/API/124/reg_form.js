@@ -17,7 +17,7 @@ exports.viewReg = async function (req, res, next) {
 }
 exports.addReg = async function (req, res, next) {
     let data = req.body
-    let id = req.params.id
+    let id = 'REG' + Math.floor(Math.random()*1000 + 62) ;
     try {
         let pool = await sql.connect(db);
         data = await pool.request()
@@ -49,6 +49,8 @@ exports.updateReg = async function (req, res, next) {
             .input('statusUpdate', sql.Int, data.statusUpdate)
             .execute('updateStatusReg')
         sql.close()
+
+        console.log(data) ;
         if (data.returnValue == 0) {
             res.status(200).send({ "returnValue": data.returnValue })
         }

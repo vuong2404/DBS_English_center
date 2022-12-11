@@ -44,22 +44,24 @@ END
 
 
 -- Funciton danh sách học viên của của một chi nhánh cho trước
-ALTER FUNCTION listStudents(@branch_id CHAR(7)) 
-RETURNs @listStudents TABLE(stu_ID CHAR(7),fname NVARCHAR(15), minit NVARCHAR(15),
-								lname NVARCHAR(15), bdate DATE, address NVARCHAR(100),email	VARCHAR(50))
-AS
-BEGIN
-	INSERT INTO @listStudents(stu_ID, fname, minit, lname, bdate, address, email) 
-		SELECT stu_ID, fname, minit, lname, bdate, address, email FROM Student 
-		WHERE Student.fk_c_ID IN (SELECT c_id FROM Course 
-								  WHERE Course.fk_dnum = @branch_id)
-	return;
-END
+--CREATE FUNCTION listStudents(@branch_id CHAR(7)) 
+--RETURNs @listStudents TABLE(stu_ID CHAR(7),fname NVARCHAR(15), minit NVARCHAR(15),
+--								lname NVARCHAR(15), bdate DATE, address NVARCHAR(100),email	VARCHAR(50))
+--AS
+--BEGIN
+--	INSERT INTO @listStudents(stu_ID, fname, minit, lname, bdate, address, email) 
+--		SELECT stu_ID, fname, minit, lname, bdate, address, email FROM Student 
+--		WHERE Student.fk_c_ID IN (SELECT c_id FROM Course 
+--								  WHERE Course.fk_dnum = @branch_id)
+--	return;
+--END
+
+select * from Student
 
 select * from listStudents('BRANCH2')
 
 --Function tính số khoá học mà học viên tham gia
-ALTER FUNCTION numOfCourses(@stu_id CHAR(7)) 
+CREATE FUNCTION numOfCourses(@stu_id CHAR(7)) 
 RETURNs INT
 AS
 BEGIN

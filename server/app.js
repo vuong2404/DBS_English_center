@@ -86,7 +86,7 @@ router.route('/register')
         await regForm.viewReg(req, res, next)
         Result(req, res)
     })
-router.route('/register/add/:id')                  // Add register form  --  API example: http://localhost:3003/register/add/REG1065 + body
+router.route('/register/add')                  // Add register form  --  API example: http://localhost:3003/register/add/REG1065 + body
     .post(async function (req, res, next) {
         await regForm.addReg(req, res, next)
         Result(req, res)
