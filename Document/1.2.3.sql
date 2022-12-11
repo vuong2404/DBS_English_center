@@ -11,8 +11,6 @@ AS
 									WHERE Course.fk_dnum = @dnum 
 									)
 	ORDER BY Teacher.lname
-	IF @@ROWCOUNT = 0
-		PRINT N'Không có giáo viên nào dạy tại chi nhánh'
 GO
 
 -- Hiển thị bảng dữ liệu các thông tin tóm tắt về học viên bao gồm: ID, tên, ngày sinh, địa chỉ, email, tổng số khóa học đăng kí

@@ -3,6 +3,7 @@ import Home from "../pages/Home";
 import RegisterCourses from "../pages/RegisterCourses";
 import RegisterForms from "../pages/RegisterForms";
 import Student from "../pages/Student";
+import Teacher from "../pages/Teacher";
 
 export const routes = [
     {
@@ -21,6 +22,10 @@ export const routes = [
 
     {
         path: '/register-form', component: RegisterForms
+    },
+
+    {
+        path: '/teacher', component: Teacher
     },
 
 

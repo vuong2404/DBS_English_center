@@ -7,6 +7,7 @@ let syll = require('./API/121/syllabus')
 let student = require('./API/122/student')
 let register = require('./API/124/register')
 let regForm = require('./API/124/reg_form')
+let teacher = require('./API/122/teacher')
 
 // Create a router
 let router = server.Router()
@@ -72,6 +73,28 @@ router.route('/student/sort')
         await student.sortStudent(req, res, next)
         Result(req, res)
     })
+// teacher API (extend API)
+router.route('/teacher')
+.get(async function (req, res, next) {         // View teacher info  -- API example: http://localhost:3003/teacher
+    await teacher.viewTeacher(req, res, next) // Search teacher by name -- API example: http://localhost:3003/teacher?name=Phạm 
+    Result(req, res)
+})
+
+router.route('/teacher/:id')
+.put(async function (req, res, next) {           // Update teacher info  -- API example: http://localhost:3003/teacher/TEA1001 + body  
+    await teacher.updateTeacher(req, res, next)
+    Result(req, res)
+})
+.delete(async function (req, res, next) {
+    await teacher.deleteTeacher(req, res, next) // Delete teacher -- API example: http://localhost:3003/teacher/TEA1001
+    Result(req, res)
+})
+
+router.route('/teacher/sort')
+.get(async function (req, res, next) {          // Sort teacher by attribute -- API example: http://localhost:3003/teacher/sort?key=Name
+    await teacher.sortTeacher(req, res, next)
+    Result(req, res)
+})
 
 // Register API (api for question c)
 router.route('/register/calcpay')            // id: ma khoa hoc, pid: ma khuyen mai

@@ -218,3 +218,108 @@ GO
 
 EXEC addRegFORM @form_ID= 'REG1063', @fk_c_ID= 'LA1001', @fk_stu_ID= 'STU1000'
 EXEC updateStatusReg @form_ID= 'REG1063', @statusUpdate= 0
+
+----------------------------------------- EXTEND TEACHER
+---------------------------------------------TEACHER
+ CREATE VIEW teacherInfoView
+AS
+	SELECT teacher_ID, fname, minit, lname, bdate, address, email, salary, COUNT(*) AS totalCourse
+	FROM  Lesson, Teacher, Course
+	WHERE fk_c_ID = c_ID AND fk_teacher_ID =  teacher_ID AND e_date > GETDATE()
+	GROUP BY teacher_ID, fname, minit, lname, bdate, address, email, salary
+GO
+
+
+CREATE PROCEDURE searchTeacherInfo
+(@name NVARCHAR(50)
+)
+AS 
+BEGIN
+	SELECT teacher_ID, fname, minit, lname, bdate, address, email, salary, COUNT(*) AS totalCourse
+	FROM Lesson, Teacher, Course
+	WHERE fk_c_ID = c_ID AND fk_teacher_ID =  teacher_ID AND e_date > GETDATE() AND CONCAT(fname, ' ', minit, ' ', lname) LIKE CONCAT(N'%', @name ,'%')
+	GROUP BY teacher_ID, fname, minit, lname, bdate, address, email, salary
+	ORDER BY teacher_ID
+END
+GO
+
+CREATE PROCEDURE sortTeacherInfo
+(
+@property NVARCHAR(50)
+)
+AS 
+BEGIN
+	SELECT *
+	FROM teacherInfoView
+	ORDER BY 
+	(CASE
+		WHEN @property= 'ID' THEN CAST(teacher_ID AS NVARCHAR(30))
+		WHEN @property= 'Name' THEN CAST(fname AS NVARCHAR(30))
+		WHEN @property= 'Bdate' THEN CAST(bdate AS NVARCHAR(30))
+		WHEN @property= 'Address' THEN CAST(address AS NVARCHAR(30))
+		WHEN @property= 'Email' THEN CAST(email AS NVARCHAR(30))
+		WHEN @property= 'Salary' THEN CAST(salary AS NVARCHAR(30))
+		WHEN @property= 'numCourse' THEN CAST(totalCourse AS NVARCHAR(30))
+		ELSE CAST(teacher_ID AS NVARCHAR(30))
+	END), fname, lname
+END
+GO
+
+CREATE PROCEDURE updateTeacherInfo
+(
+	@teacher_ID		CHAR(7),
+	@fname		NVARCHAR(15),
+	@minit		NVARCHAR(15),					
+	@lname		NVARCHAR(15),
+	@bdate		DATE,
+	@address	NVARCHAR(100),
+	@email		VARCHAR(50),
+	@salary		INT
+)
+AS 
+BEGIN
+	BEGIN TRY
+		UPDATE Teacher
+		SET fname= @fname, minit= @minit, lname= @lname, bdate= @bdate, address= @address, email= @email, salary= @salary
+		WHERE teacher_ID= @teacher_ID
+		RETURN 0
+	END TRY
+	BEGIN CATCH
+		RETURN -1
+	END CATCH
+END
+GO
+
+CREATE PROCEDURE deleteTeacher
+( 
+	@teacher_ID		CHAR(7)
+)
+AS
+BEGIN
+	BEGIN TRY
+		DELETE FROM Lesson
+		WHERE fk_teacher_ID = @teacher_ID
+		DELETE FROM Teacher
+		WHERE teacher_ID= @teacher_ID
+		RETURN 0
+	END TRY
+	BEGIN CATCH
+		RETURN -1
+	END CATCH
+END
+GO
+
+
+CREATE PROCEDURE sumaryTeacherInfo
+(@numberCourse INT
+)
+AS 
+BEGIN
+	SELECT teacher_ID, fname, minit, lname, bdate, address, email, salary, COUNT(*) AS totalCourse
+	FROM Lesson, Teacher, Course
+	WHERE fk_c_ID = c_ID AND fk_teacher_ID =  teacher_ID AND e_date > GETDATE()
+	GROUP BY teacher_ID, fname, minit, lname, bdate, address, email, salary
+	HAVING COUNT(*) >= @numberCourse
+	ORDER BY teacher_ID
+END
+GO
