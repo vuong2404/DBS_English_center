@@ -80,7 +80,9 @@ select dbo.calcTotalPay('LA1002','D1P2');
 select dbo.calcTotalPay('LA1002','D2P2');
 select dbo.calcTotalPay('LA1003','D2P2');
 select dbo.calcTotalPay('LA1004','D2P2');
-
+select dbo.calcTotalPay('LA1004','D2P1');
 
 DROp function calcTotalPay
+
+UPDATE P_apply set discount_amount=10 where fk_c_ID = 'LA1002' and fk_p_ID='D1P2'
 

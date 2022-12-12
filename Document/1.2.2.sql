@@ -1,11 +1,26 @@
-﻿
-
--------------------------------------------------------------
+﻿-------------------------------------------------------------
 --- set giá trị tiền ở phiếu đăng kí khi tao 1 đăng kí mới---
 -------------------------------------------------------------
 CREATE TRIGGER trg_Reg_form ON Reg_form AFTER INSERT AS 
 BEGIN
 	DECLARE @discount int
+	DECLARE @check int
+	--kiem tra khoa hoc co duoc su dung khuyen mai do khong
+	SELECT @check =count(*)	
+	FROM P_apply,inserted
+		WHERE inserted.fk_c_ID = P_apply.fk_c_ID
+if(@check=0)
+begin
+UPDATE Reg_form
+	SET total_fee = (SELECT fee FROM Course,inserted
+		WHERE inserted.fk_c_ID = Course.c_ID)
+	FROM Course
+	JOIN inserted ON Course.c_ID = inserted.fk_c_ID
+WHERE Reg_form.form_ID = inserted.form_ID
+end
+else
+begin
+
 	SELECT @discount=max(discount_amount) FROM P_apply,inserted
 		WHERE inserted.fk_c_ID = P_apply.fk_c_ID
 	if(@discount>100)
@@ -30,6 +45,7 @@ begin
 	JOIN inserted ON Course.c_ID = inserted.fk_c_ID
 	WHERE Reg_form.form_ID = inserted.form_ID
 end
+end
 END
 GO
 
@@ -47,6 +63,7 @@ END
 GO
 
 
+
 -------------------------------------------------------------
 -- cap nhat si so cua lop hoc sau khi xoa hoc vien thuoc ve
 -------------------------------------------------------------
@@ -58,7 +75,6 @@ BEGIN
 	JOIN deleted ON Class.class_ID = deleted.fk_class_ID and Class.fk_c_ID=deleted.fk_c_ID
 END
 GO
-
 
 -------------------------------------------------------------
 ----------------------------TEST1-----------------------------
@@ -81,13 +97,16 @@ go
 INSERT INTO Reg_form(form_ID, fk_c_ID,fk_stu_ID, reg_time) VALUES
 	('REG1014', 'LA1004','STU1014', '2022-11-27T14:25:10')
 go
-
+INSERT INTO Reg_form(form_ID, fk_c_ID,fk_stu_ID, reg_time) VALUES
+	('REG1015', 'LA1005','STU1015', '2022-11-27T14:25:10')
+go
 
 drop TRIGGER trg_Reg_form
 DELETE FROM Reg_form WHERE form_ID='REG1011';
 DELETE FROM Reg_form WHERE form_ID='REG1012';
 DELETE FROM Reg_form WHERE form_ID='REG1013';
 DELETE FROM Reg_form WHERE form_ID='REG1014';
+DELETE FROM Reg_form WHERE form_ID='REG1015';
 -------------------------------------------------------------
 ----------------------------TEST2----------------------------
 select * from Class 
