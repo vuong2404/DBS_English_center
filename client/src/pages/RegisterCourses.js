@@ -71,14 +71,17 @@ function RegisterCourses() {
   console.log(selectedCourses[0])
 
   const handleRegisterCourse = async () => {
-      // await axios({
-      //   method: 'post',
-      //   url: 'http://localhost:3003/register/add',
-      //   data: {
-      //     fk_c_ID: selectedCourses[0].c_ID,
-
-      //   }
-      // })
+      await axios({
+        method: 'post',
+        url: 'http://localhost:3003/register/add',
+        data: {
+          fk_c_ID: selectedCourses[0].c_ID,
+          fk_stu_ID: 'STU1001'
+        }
+      }).then(res => {
+        alert('Đăng kí thành công!')
+        setPage('')
+      })
   }
 
   const totalCost = selectedCourses.reduce((res, item) => res + item.fee, 0);

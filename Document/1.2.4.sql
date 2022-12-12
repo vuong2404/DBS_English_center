@@ -43,33 +43,23 @@ END
 
 
 
--- Funciton danh sách học viên của của một chi nhánh cho trước
---CREATE FUNCTION listStudents(@branch_id CHAR(7)) 
---RETURNs @listStudents TABLE(stu_ID CHAR(7),fname NVARCHAR(15), minit NVARCHAR(15),
---								lname NVARCHAR(15), bdate DATE, address NVARCHAR(100),email	VARCHAR(50))
---AS
---BEGIN
---	INSERT INTO @listStudents(stu_ID, fname, minit, lname, bdate, address, email) 
---		SELECT stu_ID, fname, minit, lname, bdate, address, email FROM Student 
---		WHERE Student.fk_c_ID IN (SELECT c_id FROM Course 
---								  WHERE Course.fk_dnum = @branch_id)
---	return;
---END
-
-select * from Student
-
-select * from listStudents('BRANCH2')
-
 --Function tính số khoá học mà học viên tham gia
-CREATE FUNCTION numOfCourses(@stu_id CHAR(7)) 
+use English_center
+CREATE OR ALTER FUNCTION numOfCourses(@stu_id CHAR(7)) 
 RETURNs INT
 AS
 BEGIN
 	DECLARE @res int ;
-	SET @res = (SELECT COUNT(*) FROM Belong WHERE @stu_id = fk_stu_ID);
+	SET @res = (SELECT COUNT(*) FROM Reg_form WHERE @stu_id = fk_stu_ID);
 	return @res ;
 END
 
+SELECT dbo.numOfCourses('STU1004')
+GO
+
+
+------------------------
+--- Function tính tỉ lệ phần trăm học viên đăng kí khoá họcu tại  1 chi nhanh
 
 
 UPDATE dbo.Course set fee = 2392136 where Course.c_id = 'LA1001'
@@ -77,7 +67,6 @@ INSERT into dbo.promotion values ('D1P3', 'percen', 31, '2022-12-01', '2023-04-0
 select dbo.calcTotalPay('LA1001', 'D1P3') 
 
 
-SELECT dbo.numOfCourses('STU1001')
 
 
 
